@@ -1,0 +1,120 @@
+{% extends "documentation/base_docs.html" %}
+
+{% block doc_title %}API Overview{% endblock %}
+
+{% block doc_content %}
+<div class="doc-header">
+    <h1>API Overview</h1>
+    <p class="lead">Learn how to integrate and interact with our platform's powerful API endpoints.</p>
+</div>
+
+<div class="feature-card">
+    <div class="card-icon">
+        <i class="bi bi-code-square"></i>
+    </div>
+    <div class="card-content">
+        <h2>Quick Start</h2>
+        <div class="code-block">
+            <pre><code>curl -X GET "https://api.nextdata.com/v1/models" \
+    -H "Authorization: Bearer YOUR_API_KEY"</code></pre>
+            <button class="copy-btn">Copy</button>
+        </div>
+    </div>
+</div>
+
+<div class="steps-container">
+    <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h3>Authentication</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="bi bi-key"></i>
+                    <p>All API requests require authentication using an API key. You can obtain your API key from your account settings.</p>
+                </div>
+                <div class="info-box">
+                    <i class="bi bi-info-circle"></i>
+                    <p>Keep your API key secure and never share it publicly!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h3>Base URL</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="bi bi-globe"></i>
+                    <p>All API requests should be made to:</p>
+                    <code>https://api.nextdata.com/v1/</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h3>Response Format</h3>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="bi bi-file-code"></i>
+                    <p>All responses are returned in JSON format with the following structure:</p>
+                    <div class="code-block">
+                        <pre><code>{
+    "status": "success",
+    "data": { ... },
+    "message": "Optional message"
+}</code></pre>
+                        <button class="copy-btn">Copy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="resources-section">
+    <h3>Additional Resources</h3>
+    <div class="resources-grid">
+        <a href="{{ url_for('documentation_page', page='endpoints') }}" class="resource-card">
+            <i class="bi bi-list-check"></i>
+            <h4>API Endpoints</h4>
+            <p>Detailed documentation for all available endpoints</p>
+        </a>
+        <a href="#" class="resource-card">
+            <i class="bi bi-code-slash"></i>
+            <h4>Code Examples</h4>
+            <p>Sample code in various programming languages</p>
+        </a>
+        <a href="#" class="resource-card">
+            <i class="bi bi-question-circle"></i>
+            <h4>API FAQs</h4>
+            <p>Common questions about API usage</p>
+        </a>
+    </div>
+</div>
+
+<div class="tips-section">
+    <h3>Best Practices</h3>
+    <div class="tips-grid">
+        <div class="tip-card">
+            <i class="bi bi-shield-check"></i>
+            <h4>Security</h4>
+            <p>Always use HTTPS and keep your API keys secure</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-speedometer2"></i>
+            <h4>Rate Limiting</h4>
+            <p>Implement proper rate limiting in your applications</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-arrow-repeat"></i>
+            <h4>Error Handling</h4>
+            <p>Always handle API errors gracefully in your code</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

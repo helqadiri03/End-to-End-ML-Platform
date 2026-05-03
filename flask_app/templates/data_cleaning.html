@@ -1,0 +1,251 @@
+
+
+{% extends "base.html" %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Analysis Cleaning</title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    /* General Layout */
+    .container {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    /* Button Styling */
+    .container-btn-file {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        background-color: #0F1035;
+        color: #fff;
+        border-style: none;
+        padding: 1em 2em;
+        border-radius: 0.5em;
+        overflow: hidden;
+        z-index: 1;
+        box-shadow: 4px 8px 10px -3px rgba(0, 0, 0, 0.356);
+        transition: all 250ms;
+        margin: 0 auto;
+    }
+
+    .container-btn-file input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .container-btn-file > svg {
+        width: 20px;
+        margin-left: 15px;
+        position: relative;
+        top: 6%;
+    }
+
+    .container-btn-file::before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 0;
+        border-radius: 0.5em;
+        background-color: #363994;
+        z-index: -1;
+        transition: all 350ms;
+    }
+
+    .container-btn-file:hover::before {
+        width: 100%;
+    }
+
+    /* Loading Spinner */
+    .loading-spinner {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .spinner-border {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    /* Table Styling */
+    .table {
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+
+
+    .table th {
+        background-color: #265ca8 !important;
+        color: white !important;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        padding: 12px !important;
+    }
+
+    .table td {
+        padding: 10px;
+        vertical-align: middle;
+        transition: background-color 0.3s ease;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(52, 152, 219, 0.1);
+    }
+
+    /* Button Styling */
+    .btn-primary {
+        background-color: #363994 !important;
+        border-color: #2c3e50;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-primary:hover {
+        background-color: #34495e;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn-secondary {
+        background-color: #363994 !important;
+        border-color: #7f8c8d;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .btn-secondary:hover {
+        background-color: #95a5a6;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="file-upload-container text-center" id="uploadSection">
+            <h3>Choose a file:</h3>
+            <p>Provide your data file (CSV or Excel)</p>
+            <form id="uploadSection" enctype="multipart/form-data" class="d-flex flex-column align-items-center">
+                <button class="container-btn-file">
+                  <svg
+                    fill="#fff"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 50 50"
+                  >
+                    <path
+                      d="M28.8125 .03125L.8125 5.34375C.339844 5.433594 0 5.863281 0 6.34375L0 43.65625C0 44.136719 .339844 44.566406 .8125 44.65625L28.8125 49.96875C28.875 49.980469 28.9375 50 29 50C29.230469 50 29.445313 49.929688 29.625 49.78125C29.855469 49.589844 30 49.296875 30 49L30 1C30 .703125 29.855469 .410156 29.625 .21875C29.394531 .0273438 29.105469 -.0234375 28.8125 .03125ZM32 6L32 13L34 13L34 15L32 15L32 20L34 20L34 22L32 22L32 27L34 27L34 29L32 29L32 35L34 35L34 37L32 37L32 44L47 44C48.101563 44 49 43.101563 49 42L49 8C49 6.898438 48.101563 6 47 6ZM36 13L44 13L44 15L36 15ZM6.6875 15.6875L11.8125 15.6875L14.5 21.28125C14.710938 21.722656 14.898438 22.265625 15.0625 22.875L15.09375 22.875C15.199219 22.511719 15.402344 21.941406 15.6875 21.21875L18.65625 15.6875L23.34375 15.6875L17.75 24.9375L23.5 34.375L18.53125 34.375L15.28125 28.28125C15.160156 28.054688 15.035156 27.636719 14.90625 27.03125L14.875 27.03125C14.8125 27.316406 14.664063 27.761719 14.4375 28.34375L11.1875 34.375L6.1875 34.375L12.15625 25.03125ZM36 20L44 20L44 22L36 22ZM36 27L44 27L44 29L36 29ZM36 35L44 35L44 37L36 37Z"
+                    ></path>
+                  </svg>
+                  Upload File
+                  <input type="file" id="fileInput" class="form-control mb-3" name="file" accept=".csv,.xlsx,.xls" />
+                </button>
+                
+                <!-- Loading spinner -->
+                <div class="loading-spinner" id="loadingSpinner">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                  <p class="mt-2">Processing your file... Please wait</p>
+                </div>
+            </form>
+        </div>
+
+        {% if data is not none %}
+        <div id="dataDisplay" class="mt-4">
+            <h3 style="text-align: center;">Data Preview</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">                        
+                        <tr>
+                            {% for column in data.columns %}
+                                <th>{{ column }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for _, row in data.head().iterrows() %}
+                            <tr>
+                                {% for value in row %}
+                                    <td {% if value is none or value|string == 'nan' or value|string == '' %} class="null-value">N/A
+                                        {% else %} class="fw-normal">{{ value }} {% endif %}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-4 text-center">
+                <a href="{{ url_for('automatic_cleaning') }}" class="btn btn-primary">Automatic Cleaning</a>
+                <a href="{{ url_for('Manuelle_Cleaning') }}" class="btn btn-primary">Manual Cleaning</a>
+                <a href="{{ url_for('learn_more') }}" class="btn btn-secondary">Learn More about the cleaning methods</a>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+    {% block script %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const uploadForm = document.getElementById('uploadSection');
+        const fileInput = document.getElementById('fileInput');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+    
+        fileInput.addEventListener('change', function() {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+    
+                if (file.size > 100 * 1024 * 1024) {
+                    alert('File is too large. Maximum size is 100MB');
+                    return;
+                }
+    
+                const formData = new FormData();
+                formData.append('file', file);
+    
+                loadingSpinner.style.display = 'block';
+    
+                fetch('/data-cleaning', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(data => {
+                            throw new Error(data.error || 'Upload failed');
+                        });
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    document.body.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loadingSpinner.style.display = 'none';
+                    alert('Error: ' + error.message);
+                });
+            }
+        });
+    });
+    </script>    
+{%endblock%}
+{% endblock %} 

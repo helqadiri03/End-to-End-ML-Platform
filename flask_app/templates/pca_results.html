@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pca.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4" >
+    <div class="d-flex justify-content-between align-items-center mb-4" style="margin-top: 100px;">
+        <h2>PCA Results</h2>
+        <div>
+            <a href="{{ url_for('models') }}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Back to Models
+            </a>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if metrics and metrics.total_variance_explained is defined %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Explained Variance</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Total Variance Explained:</strong> 
+                {{ "%.2f"|format(metrics.total_variance_explained) }}%
+            </p>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Individual Components</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Explained Variance (%)</th>
+                                <th>Cumulative (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in range(metrics.n_components) %}
+                            <tr>
+                                <td>PC{{ i + 1 }}</td>
+                                <td>{{ "%.2f"|format(metrics.explained_variance_ratio[i]) }}%</td>
+                                <td>{{ "%.2f"|format(metrics.cumulative_variance_ratio[i]) }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="col-md-6">
+                    <h5>Scree Plot</h5>
+                    <div class="graph-container" data-bs-toggle="modal" data-bs-target="#graphModal">
+                        <canvas id="screePlot"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graph Modal -->
+    <div class="modal fade" id="graphModal" tabindex="-1" aria-labelledby="graphModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="graphModalLabel">Scree Plot</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <canvas id="modalScreenPlot"></canvas>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" id="downloadGraph">
+                        <i class="fas fa-download"></i> Download Graph
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>Transformed Data Preview</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                {{ data.to_html(classes="table table-striped", index=False) | safe }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <a href="{{ url_for('download_transformed_data', file_id=file_id) }}" 
+               class="btn btn-outline-primary">
+                <i class="fas fa-download"></i> Download Transformed Data
+            </a>
+        </div>
+    </div>
+
+    <script>
+    // Initialize data for charts
+    window.pcaData = {
+        labels: {{ range(1, metrics.n_components + 1) | list | tojson | safe }},
+        explainedVariance: {{ metrics.explained_variance_ratio | tojson | safe }}
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/pca.js') }}"></script>
+    {% else %}
+    <div class="alert alert-warning">
+        No PCA results available. Please try running the PCA analysis again.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

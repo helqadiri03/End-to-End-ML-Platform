@@ -1,0 +1,212 @@
+{% extends "documentation/base_docs.html" %}
+
+{% block doc_title %}Evaluating Your Model - NextData Platform{% endblock %}
+
+{% block doc_content %}
+<div class="doc-header">
+    <h1>Evaluating Your Model</h1>
+    <p class="lead">Learn how to check your model's performance and understand its predictions.</p>
+</div>
+
+<div class="content-section">
+    <h2>Understanding Model Evaluation</h2>
+    <div class="info-box">
+        <i class="bi bi-lightbulb"></i>
+        <p>Model evaluation helps you understand how well your AI model is performing. Think of it like a report card that shows how accurately your model can make predictions.</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Viewing Results</h2>
+    <div class="steps-container">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Access Results Dashboard</h3>
+                <p>Find your model's performance:</p>
+                <ul>
+                    <li>Go to "My Models" section</li>
+                    <li>Select your trained model</li>
+                    <li>Click "View Results"</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-info-circle"></i>
+                    <p>Results are automatically generated after training completes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Understand Performance</h3>
+                <p>Review key metrics:</p>
+                <ul>
+                    <li>Overall accuracy score</li>
+                    <li>Prediction confidence</li>
+                    <li>Error analysis</li>
+                    <li>Visual performance charts</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-graph-up"></i>
+                    <p>Higher scores mean better performance. We highlight areas that need attention.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Test Predictions</h3>
+                <p>Try your model on new data:</p>
+                <ul>
+                    <li>Use "Test Model" feature</li>
+                    <li>Upload test data</li>
+                    <li>View predictions</li>
+                    <li>Compare with actual results</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-check-circle"></i>
+                    <p>Testing helps ensure your model works well on new, unseen data.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h3>Export Results</h3>
+                <p>Save and share your findings:</p>
+                <ul>
+                    <li>Download performance reports</li>
+                    <li>Export visualizations</li>
+                    <li>Share with team members</li>
+                    <li>Save model versions</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-share"></i>
+                    <p>Reports are available in PDF and Excel formats for easy sharing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Understanding Results</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <i class="bi bi-graph-up"></i>
+            <h3>Accuracy Metrics</h3>
+            <p>What the numbers mean:</p>
+            <ul>
+                <li>Overall accuracy (how often it's right)</li>
+                <li>Precision (reliability of predictions)</li>
+                <li>Recall (ability to find all cases)</li>
+                <li>Visual performance charts</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <i class="bi bi-eye"></i>
+            <h3>Visual Reports</h3>
+            <p>Easy-to-read charts:</p>
+            <ul>
+                <li>Performance trends</li>
+                <li>Error patterns</li>
+                <li>Comparison charts</li>
+                <li>Prediction distribution</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <i class="bi bi-search"></i>
+            <h3>Error Analysis</h3>
+            <p>Understanding mistakes:</p>
+            <ul>
+                <li>Where model struggles</li>
+                <li>Common error types</li>
+                <li>Improvement suggestions</li>
+                <li>Data quality insights</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Improving Results</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <i class="bi bi-tools"></i>
+            <h3>Fine-Tuning</h3>
+            <p>Ways to improve:</p>
+            <ul>
+                <li>Adjust training settings</li>
+                <li>Add more data</li>
+                <li>Clean problematic data</li>
+                <li>Try different model types</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <i class="bi bi-lightning"></i>
+            <h3>Quick Fixes</h3>
+            <p>Common solutions:</p>
+            <ul>
+                <li>Remove outliers</li>
+                <li>Balance your data</li>
+                <li>Fix missing values</li>
+                <li>Update features</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Best Practices</h2>
+    <div class="tips-grid">
+        <div class="tip-card">
+            <i class="bi bi-check2-circle"></i>
+            <h4>Regular Testing</h4>
+            <p>Test your model regularly with new data to ensure consistent performance</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-eye"></i>
+            <h4>Monitor Changes</h4>
+            <p>Keep track of performance changes over time</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-arrow-repeat"></i>
+            <h4>Iterate</h4>
+            <p>Use evaluation results to guide improvements</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Common Questions</h2>
+    <div class="faq-section">
+        <div class="faq-item">
+            <h4>What's a good accuracy score?</h4>
+            <p>It depends on your specific case, but generally, scores above 80% are considered good. We'll help you understand what's realistic for your data.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Why did my model's performance drop?</h4>
+            <p>Performance can change if your data changes or if new patterns emerge. We'll help you identify and fix the cause.</p>
+        </div>
+        <div class="faq-item">
+            <h4>How often should I evaluate my model?</h4>
+            <p>Regular evaluation is important - we recommend checking performance at least monthly or whenever your data significantly changes.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Can I compare different models?</h4>
+            <p>Yes! Our comparison tool lets you see different models side by side to choose the best one for your needs.</p>
+        </div>
+    </div>
+</div>
+
+<div class="info-box">
+    <i class="bi bi-question-circle"></i>
+    <p>Need help understanding your model's performance? Try our <a href="#">Interactive Evaluation Guide</a> or contact our support team.</p>
+</div>
+{% endblock %}

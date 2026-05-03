@@ -1,0 +1,202 @@
+{% extends "documentation/base_docs.html" %}
+
+{% block doc_title %}Installation Guide - NextData Platform{% endblock %}
+
+{% block doc_content %}
+<div class="doc-header">
+    <h1>Getting Started with NextData Platform</h1>
+    <p class="lead">Start using our platform in minutes with this simple setup guide.</p>
+</div>
+
+<div class="content-section">
+    <h2>System Requirements</h2>
+    <div class="requirements-grid">
+        <div class="requirement-card">
+            <i class="bi bi-laptop"></i>
+            <h3>Computer & Browser</h3>
+            <ul>
+                <li>Any modern computer (Windows, Mac, or Linux)</li>
+                <li>Chrome, Firefox, Safari, or Edge browser</li>
+                <li>Stable internet connection</li>
+            </ul>
+        </div>
+        
+        <div class="requirement-card">
+            <i class="bi bi-display"></i>
+            <h3>Display</h3>
+            <ul>
+                <li>Minimum resolution: 1280 x 720</li>
+                <li>Recommended: 1920 x 1080 or higher</li>
+                <li>Works on tablets too!</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Getting Started</h2>
+    <div class="steps-container">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Create Your Account</h3>
+                <p>Sign up in minutes:</p>
+                <ul>
+                    <li>Click "Sign Up" at the top right</li>
+                    <li>Enter your business email</li>
+                    <li>Choose a secure password</li>
+                    <li>Verify your email</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-shield-check"></i>
+                    <p>Your data is always secure with our enterprise-grade encryption.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Complete Your Profile</h3>
+                <p>Tell us about your business:</p>
+                <ul>
+                    <li>Add your company details</li>
+                    <li>Choose your industry</li>
+                    <li>Set your preferences</li>
+                    <li>Invite team members</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-people"></i>
+                    <p>Team members can be added anytime from your account settings.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Upload Your First Dataset</h3>
+                <p>Start with your data:</p>
+                <ul>
+                    <li>Click "Upload Data"</li>
+                    <li>Choose your file</li>
+                    <li>Review the preview</li>
+                    <li>Confirm upload</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-cloud-upload"></i>
+                    <p>We support Excel, CSV, and many other common formats.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Account Types</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <i class="bi bi-person"></i>
+            <h3>Free Trial</h3>
+            <p>Try it out:</p>
+            <ul>
+                <li>14-day full access</li>
+                <li>Basic features</li>
+                <li>Sample datasets</li>
+                <li>Email support</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <i class="bi bi-building"></i>
+            <h3>Business</h3>
+            <p>Most popular:</p>
+            <ul>
+                <li>Unlimited access</li>
+                <li>All features</li>
+                <li>Priority support</li>
+                <li>Team collaboration</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <i class="bi bi-stars"></i>
+            <h3>Enterprise</h3>
+            <p>Full power:</p>
+            <ul>
+                <li>Custom solutions</li>
+                <li>API access</li>
+                <li>24/7 support</li>
+                <li>Dedicated manager</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Getting Help</h2>
+    <div class="help-grid">
+        <div class="help-card">
+            <i class="bi bi-book"></i>
+            <h3>Documentation</h3>
+            <p>Browse our guides:</p>
+            <ul>
+                <li>Step-by-step tutorials</li>
+                <li>Feature guides</li>
+                <li>Best practices</li>
+                <li>FAQs</li>
+            </ul>
+        </div>
+
+        <div class="help-card">
+            <i class="bi bi-headset"></i>
+            <h3>Support</h3>
+            <p>We're here to help:</p>
+            <ul>
+                <li>Live chat support</li>
+                <li>Email assistance</li>
+                <li>Phone support</li>
+                <li>Help center</li>
+            </ul>
+        </div>
+
+        <div class="help-card">
+            <i class="bi bi-play-circle"></i>
+            <h3>Training</h3>
+            <p>Learn more:</p>
+            <ul>
+                <li>Video tutorials</li>
+                <li>Webinars</li>
+                <li>Live training</li>
+                <li>Case studies</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Next Steps</h2>
+    <div class="next-steps-grid">
+        <a href="{{ url_for('documentation_page', page='data-upload') }}" class="next-step-card">
+            <i class="bi bi-cloud-upload"></i>
+            <h4>Upload Data</h4>
+            <p>Learn how to upload and manage your data</p>
+        </a>
+        <a href="{{ url_for('documentation_page', page='data-cleaning') }}" class="next-step-card">
+            <i class="bi bi-brush"></i>
+            <h4>Clean Data</h4>
+            <p>Prepare your data for analysis</p>
+        </a>
+        <a href="{{ url_for('documentation_page', page='available-models') }}" class="next-step-card">
+            <i class="bi bi-cpu"></i>
+            <h4>Explore Models</h4>
+            <p>Discover our AI models</p>
+        </a>
+    </div>
+</div>
+
+<div class="info-box">
+    <i class="bi bi-question-circle"></i>
+    <p>Need help getting started? Our team is ready to help! <a href="{{ url_for('documentation_page', page='contact-support') }}">Contact support</a> or try our <a href="#">interactive guide</a>.</p>
+</div>
+{% endblock %}

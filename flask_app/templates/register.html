@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* From Uiverse.io by JohnnyCSilva */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #ffffff;
+            padding: 30px;
+            width: 450px;
+            border-radius: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+        }
+
+        /* Keep the alert styles */
+        .alert {
+            transition: all 0.3s ease;
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        .alert.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Add all the new styles */
+        .flex-column > label {
+            color: #151717;
+            font-weight: 600;
+        }
+
+        .inputForm {
+            border: 1.5px solid #ecedec;
+            border-radius: 10px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            transition: 0.2s ease-in-out;
+        }
+
+        .input {
+            margin-left: 10px;
+            border-radius: 10px;
+            border: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .input:focus {
+            outline: none;
+        }
+
+        .inputForm:focus-within {
+            border: 1.5px solid #2d79f3;
+        }
+
+        .button-submit {
+            margin: 20px 0 10px 0;
+            background-color: #151717;
+            border: none;
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 10px;
+            height: 50px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .p {
+            text-align: center;
+            color: black;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .span {
+            font-size: 14px;
+            color: #2d79f3;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .text-green-500 {
+            color: #10B981;
+        }
+        
+        .text-red-500 {
+            color: #EF4444;
+        }
+        
+        #password-requirements {
+            transition: all 0.3s ease;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .button-submit:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <form class="form" method="POST" action="{{ url_for('auth.register') }}">
+        <div id="alert-container" class="mb-4">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert 
+                            {% if category == 'success' %}bg-green-100 text-green-800
+                            {% elif category == 'error' %}bg-red-100 text-red-800
+                            {% endif %} 
+                            p-3 rounded mb-3">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div id="password-requirements" class="mb-4 p-3 bg-gray-50 rounded hidden">
+            <h4 class="font-semibold mb-2">Password Requirements:</h4>
+            <ul class="text-sm space-y-1">
+                <li id="length-check" class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    At least 8 characters
+                </li>
+                <li id="uppercase-check" class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    One uppercase letter
+                </li>
+                <li id="lowercase-check" class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    One lowercase letter
+                </li>
+                <li id="number-check" class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    One number
+                </li>
+                <li id="special-check" class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    One special character
+                </li>
+                <li id="match-check" class="flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    Passwords match
+                </li>
+            </ul>
+        </div>
+
+        <div class="flex-column">
+            <label>Username</label>
+        </div>
+        <div class="inputForm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+                <g data-name="Layer 3" id="Layer_3">
+                    <path d="m30.853 13.87a15 15 0 0 0 -29.729 4.082 15.1 15.1 0 0 0 12.876 12.918 15.6 15.6 0 0 0 2.016.13 14.85 14.85 0 0 0 7.715-2.145 1 1 0 1 0 -1.031-1.711 13.007 13.007 0 1 1 5.458-6.529 2.149 2.149 0 0 1 -4.158-.759v-10.856a1 1 0 0 0 -2 0v1.726a8 8 0 1 0 .2 10.325 4.135 4.135 0 0 0 7.83.274 15.2 15.2 0 0 0 .823-7.455zm-14.853 8.13a6 6 0 1 1 6-6 6.006 6.006 0 0 1 -6 6z"></path>
+                </g>
+            </svg>
+            <input placeholder="Enter your Username" class="input" type="text" name="username" required>
+        </div>
+
+        <div class="flex-column">
+            <label>Email</label>
+        </div>
+        <div class="inputForm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 32 32" height="20">
+                <path d="M28,6H4C2.895,6,2,6.895,2,8v16c0,1.105,0.895,2,2,2h24c1.105,0,2-0.895,2-2V8C30,6.895,29.105,6,28,6z M26.5,8L16,14.78 L5.5,8H26.5z M4,24V9.135l12,7.864l12-7.864V24H4z"/>
+            </svg>
+            <input placeholder="Enter your Email" class="input" type="email" name="email" required>
+        </div>
+
+        <div class="flex-column">
+            <label>Password</label>
+        </div>
+        <div class="inputForm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="-64 0 512 512" height="20">
+                <path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path>
+                <path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
+            </svg>
+            <input placeholder="Enter your Password" class="input" type="password" name="password" required>
+        </div>
+
+        <div class="flex-column">
+            <label>Confirm Password</label>
+        </div>
+        <div class="inputForm">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="-64 0 512 512" height="20">
+                <path d="m336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path>
+                <path d="m304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
+            </svg>
+            <input placeholder="Confirm your Password" class="input" type="password" name="confirm_password" required>
+        </div>
+
+        <button type="submit" class="button-submit">Sign Up</button>
+        
+        <p class="p">Already have an account? 
+            <a href="{{ url_for('auth.login') }}" class="span">Sign In</a>
+        </p>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            const passwordInput = $('input[name="password"]');
+            const confirmPasswordInput = $('input[name="confirm_password"]');
+            const submitButton = $('.button-submit');
+            const requirements = $('#password-requirements');
+            
+            // Show password requirements when password field is focused
+            passwordInput.focus(function() {
+                requirements.removeClass('hidden');
+            });
+
+            function updateRequirement(requirement, isValid) {
+                const element = $(`#${requirement}-check`);
+                const icon = element.find('svg');
+                
+                if (isValid) {
+                    element.removeClass('text-red-500').addClass('text-green-500');
+                    icon.html('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>');
+                } else {
+                    element.removeClass('text-green-500').addClass('text-red-500');
+                    icon.html('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>');
+                }
+            }
+
+            function validatePassword() {
+                const password = passwordInput.val();
+                const confirmPassword = confirmPasswordInput.val();
+                
+                // Check each requirement
+                updateRequirement('length', password.length >= 8);
+                updateRequirement('uppercase', /[A-Z]/.test(password));
+                updateRequirement('lowercase', /[a-z]/.test(password));
+                updateRequirement('number', /\d/.test(password));
+                updateRequirement('special', /[!@#$%^&*(),.?":{}|<>]/.test(password));
+                updateRequirement('match', password === confirmPassword && password !== '');
+
+                // Enable/disable submit button based on all requirements being met
+                const allRequirementsMet = 
+                    password.length >= 8 &&
+                    /[A-Z]/.test(password) &&
+                    /[a-z]/.test(password) &&
+                    /\d/.test(password) &&
+                    /[!@#$%^&*(),.?":{}|<>]/.test(password) &&
+                    password === confirmPassword &&
+                    password !== '';
+
+                submitButton.prop('disabled', !allRequirementsMet);
+                submitButton.css('opacity', allRequirementsMet ? 1 : 0.5);
+            }
+
+            // Add real-time validation
+            passwordInput.on('input', validatePassword);
+            confirmPasswordInput.on('input', validatePassword);
+
+            // Animate flash messages
+            $('.alert').each(function(index) {
+                const $alert = $(this);
+                setTimeout(function() {
+                    $alert.addClass('show');
+                }, 100 * (index + 1));
+
+                // Auto-dismiss after 5 seconds
+                setTimeout(function() {
+                    $alert.slideUp(300, function() {
+                        $(this).remove();
+                    });
+                }, 5000);
+
+                // Allow manual closing
+                $alert.on('click', function() {
+                    $(this).slideUp(300, function() {
+                        $(this).remove();
+                    });
+                });
+            });
+
+            // Form submission validation
+            $('.form').on('submit', function(e) {
+                const password = passwordInput.val();
+                const confirmPassword = confirmPasswordInput.val();
+
+                if (password !== confirmPassword) {
+                    e.preventDefault();
+                    alert('Passwords do not match!');
+                    return false;
+                }
+
+                if (password.length < 8) {
+                    e.preventDefault();
+                    alert('Password must be at least 8 characters long!');
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

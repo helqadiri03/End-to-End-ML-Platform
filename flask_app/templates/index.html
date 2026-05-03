@@ -1,0 +1,527 @@
+
+
+{% extends "base.html" %}
+
+
+{% block head %}
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - NextData</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+{% endblock %}
+
+{% block content %}
+
+  <main class="main">
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
+              <div class="company-badge mb-4">
+                <i class="bi bi-gear-fill me-2"></i>
+                Transforming Data into Insights
+              </div>
+
+              <h1 class="mb-4">
+                Advanced Data <br>
+                Analysis and <br>
+                <span class="accent-text">Machine Learning Models</span>
+              </h1>
+
+              <p class="mb-4 mb-md-5">
+                Transform raw data into powerful insights with our AI-driven analytics platform. 
+                Streamline your workflow, predict trends, and make smarter decisions faster.
+              </p>
+
+              <div class="hero-buttons">
+                <a href="{{ url_for('analyse') }}" class="btn btn-primary me-0 me-sm-2 mx-1">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="hero-image" data-aos="zoom-out" data-aos-delay="300">
+              <img src="{{url_for('static', filename='images/illustration-1.webp')}}" alt="Hero Image" class="img-fluid">
+            </div>
+          </div>
+        </div>
+
+        <div class="row stats-row gy-4 mt-5" data-aos="fade-up" data-aos-delay="500">
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="bi bi-trophy"></i>
+              </div>
+              <div class="stat-content">
+                <h4>3+ Industry Awards</h4>
+                <p class="mb-0">Innovation in AI</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="bi bi-briefcase"></i>
+              </div>
+              <div class="stat-content">
+                <h4>100+ Clients</h4>
+                <p class="mb-0">Global Businesses</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="bi bi-graph-up"></i>
+              </div>
+              <div class="stat-content">
+                <h4>95% Accuracy</h4>
+                <p class="mb-0">Predictive Models</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="stat-item">
+              <div class="stat-icon">
+                <i class="bi bi-award"></i>
+              </div>
+              <div class="stat-content">
+                <h4>24/7 Support</h4>
+                <p class="mb-0">Expert Assistance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+    <!-- /Hero Section -->
+
+
+    <section id="features" class="features section">
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Platform Features</h2>
+        <p>Powerful tools to transform your data into actionable insights</p>
+      </div><!-- End Section Title -->
+    
+      <div class="container">
+        <div class="d-flex justify-content-center">
+          <ul class="nav nav-tabs" data-aos="fade-up" data-aos-delay="100">
+            <li class="nav-item">
+              <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#features-tab-1">
+                <h4>Data Integration</h4>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-2">
+                <h4>ML Models</h4>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-bs-toggle="tab" data-bs-target="#features-tab-3">
+                <h4>Deployment</h4>
+              </a>
+            </li>
+          </ul>
+        </div>
+    
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+          <div class="tab-pane fade active show" id="features-tab-1">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Seamless Data Integration</h3>
+                <p class="fst-italic">
+                  Connect and unify data from multiple sources with our advanced integration tools.
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>Support for 200+ data sources and formats</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Real-time data streaming and synchronization</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Automated data cleaning and preprocessing</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center">
+                <img src="{{url_for('static', filename='images/features-illustration-1.webp')}}" alt="Data Integration" class="img-fluid">
+              </div>
+            </div>
+          </div>
+    
+          <div class="tab-pane fade" id="features-tab-2">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Advanced Machine Learning</h3>
+                <p class="fst-italic">
+                  Build, train, and optimize machine learning models with cutting-edge algorithms.
+                </p>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>50+ pre-built machine learning models</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Custom model development environment</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Automated feature engineering</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Hyperparameter tuning and model optimization</span></li>
+                </ul>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center" style="margin-top: 60px;">
+                <img src="{{url_for('static', filename='images/ml_model.jpg')}}" alt="Machine Learning Models" class="img-fluid" style="width: 75%;height: 70%;">
+              </div>
+            </div>
+          </div>
+    
+          <div class="tab-pane fade" id="features-tab-3">
+            <div class="row">
+              <div class="col-lg-6 order-2 order-lg-1 mt-3 mt-lg-0 d-flex flex-column justify-content-center">
+                <h3>Effortless Model Deployment</h3>
+                <ul>
+                  <li><i class="bi bi-check2-all"></i> <span>One-click model deployment</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Real-time prediction and inference</span></li>
+                  <li><i class="bi bi-check2-all"></i> <span>Comprehensive model monitoring</span></li>
+                </ul>
+                <p class="fst-italic">
+                  Transform your models from development to production with ease and confidence.
+                </p>
+              </div>
+              <div class="col-lg-6 order-1 order-lg-2 text-center" style="margin-top: 60px;">
+                <img src="{{url_for('static', filename='images/deploy.jpg')}}" alt="Model Deployment" class="img-fluid" style="width: 75%;height: 70%;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!-- Features Cards Section -->
+<section id="features-cards" class="features-cards section">
+  <div class="container">
+    <div class="row gy-4">
+      <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="feature-box orange">
+          <i class="bi bi-bar-chart-line"></i>
+          <h4>Advanced Analytics</h4>
+          <p>Leverage sophisticated statistical methods and machine learning algorithms to uncover deep insights from your data</p>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+        <div class="feature-box blue">
+          <i class="bi bi-shield-lock"></i>
+          <h4>Enterprise Security</h4>
+          <p>Robust data protection with end-to-end encryption, compliance controls, and advanced access management</p>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+        <div class="feature-box green">
+          <i class="bi bi-cloud-upload"></i>
+          <h4>Scalable Infrastructure</h4>
+          <p>Seamless cloud deployment with auto-scaling capabilities to handle massive datasets and complex computations</p>
+        </div>
+      </div>
+
+      <div class="col-xl-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
+        <div class="feature-box red">
+          <i class="bi bi-robot"></i>
+          <h4>AI-Powered Insights</h4>
+          <p>Intelligent recommendations and predictive models that transform raw data into actionable business strategies</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+    <!-- /Features Cards Section -->
+
+
+
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials section light-background">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Customer Success Stories</h2>
+        <p>Real insights from businesses transforming their data strategy with our platform</p>
+      </div>
+
+      <div class="container">
+
+        <div class="row g-5">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="testimonial-item">
+              <img src="{{url_for('static', filename='images/testimonials-1.jpg')}}" class="testimonial-img" alt="">
+              <h3>Michael Chen</h3>
+              <h4>CTO, TechInnovate Solutions</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                <span>Our predictive analytics capability increased by 40% after implementing this platform. The machine learning models are intuitive, powerful, and have transformed how we make data-driven decisions.</span>
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="testimonial-item">
+              <img src="{{url_for('static', filename='images/testimonials-2.jpg')}}"class="testimonial-img" alt="">
+              <h3>Emma Rodriguez</h3>
+              <h4>Lead Data Scientist</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                <span>The platform's data integration and model deployment tools have cut our development time in half. Its seamless workflow from data preprocessing to model production is a game-changer.</span>
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="testimonial-item">
+              <img src="{{url_for('static', filename='images/testimonials-3.jpg')}}" class="testimonial-img" alt="">
+              <h3>David Kim</h3>
+              <h4>Business Analytics Manager</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                <span>The AI-powered insights have been incredible. We've uncovered market trends and customer behaviors that were invisible to us before. The platform's predictive capabilities are simply outstanding.</span>
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="testimonial-item">
+              <img src="{{url_for('static', filename='images/testimonials-4.jpg')}}" class="testimonial-img" alt="">
+              <h3>Sarah Thompson</h3>
+              <h4>Startup Founder</h4>
+              <div class="stars">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              </div>
+              <p>
+                <i class="bi bi-quote quote-icon-left"></i>
+                <span>As a small startup, this platform leveled the playing field. The scalable infrastructure and enterprise-grade security mean we can compete with much larger companies in data analysis and machine learning.</span>
+                <i class="bi bi-quote quote-icon-right"></i>
+              </p>
+            </div>
+          </div><!-- End testimonial item -->
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- /Testimonials Section -->
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="121" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Clients</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Projects</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Hours Of Support</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+              <p>Workers</p>
+            </div>
+          </div><!-- End Stats Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+    <!-- Services Section -->
+    <section id="services" class="services section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Data Processing Services</h2>
+        <p>A comprehensive platform for data analysis, cleaning, visualization, and machine learning</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-4">
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-activity"></i>
+              </div>
+              <div>
+                <h3>Data Collection and Integration</h3>
+                <p>Collect data from multiple sources, formats, and platforms. Seamless connection to databases, APIs, and files with advanced extraction and transformation techniques.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-diagram-3"></i>
+              </div>
+              <div>
+                <h3>Data Cleaning and Preprocessing</h3>
+                <p>Advanced data cleaning techniques: handling missing values, detecting and correcting anomalies, data normalization, and standardization for high-quality datasets.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-easel"></i>
+              </div>
+              <div>
+                <h3>Interactive Visualization</h3>
+                <p>Transform your data into dynamic charts, customizable dashboards, and visual reports with advanced statistical analysis tools to uncover meaningful insights.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="service-card d-flex">
+              <div class="icon flex-shrink-0">
+                <i class="bi bi-clipboard-data"></i>
+              </div>
+              <div>
+                <h3>Automated Machine Learning</h3>
+                <p>Automatic application of machine learning algorithms for classification, prediction, and optimization. Model selection, training, validation, and real-time predictions.</p>
+              </div>
+            </div>
+          </div><!-- End Service Card -->
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- /Services Section -->
+
+
+    <!-- Contact Section -->
+<!-- Message flash pour la confirmation -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  <div class="flash-message">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endwith %}
+
+<section id="contact" class="contact section light-background">
+  <div class="container section-title">
+      <h2>Contact</h2>
+      <p>We would be delighted to receive your messages and inquiries. Feel free to contact us for any information or support requests.</p>
+    </div>
+
+  <div class="container">
+      <div class="row g-4 g-lg-5">
+          <div class="col-lg-5">
+              <div class="info-box">
+                <h3>Contact Info</h3>
+                <p>Feel free to reach out to us via any of the methods below. We are always here to assist you.</p>                
+                  <div class="info-item">
+                      <div class="icon-box"><i class="bi bi-geo-alt"></i></div>
+                      <div class="content">
+                          <h4>Our Location</h4>
+                          <p>Boukhalef</p><p>Tangier , Morocco</p>
+                      </div>
+                  </div>
+                  <div class="info-item">
+                      <div class="icon-box"><i class="bi bi-telephone"></i></div>
+                      <div class="content">
+                          <h4>Phone Number</h4>
+                          <p>+212 6 43 56 23 78 </p><p>+212 6 87 23 12 44</p>
+                      </div>
+                  </div>
+                  <div class="info-item">
+                      <div class="icon-box"><i class="bi bi-envelope"></i></div>
+                      <div class="content">
+                          <h4>Email Address</h4>
+                          <p>info@gmail.com</p><p>contact@gmail.com</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-lg-7">
+              <div class="contact-form">
+                <h3>Get In Touch</h3>
+                <p>We’d love to hear from you! If you have any questions or feedback, feel free to reach out to us.</p>                
+                  <form action="/" method="post">
+                      <div class="row gy-4">
+                          <div class="col-md-6">
+                              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                          </div>
+                          <div class="col-md-6">
+                              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                          </div>
+                          <div class="col-12">
+                              <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                          </div>
+                          <div class="col-12">
+                              <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
+                          </div>
+                          <div class="col-12 text-center">
+                              <button type="submit" class="btn">Send Message</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+</section><!-- /Contact Section -->
+
+  </main>
+
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/aos.js')}}"></script>
+  <script src="{{url_for('static', filename='js/glightbox.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/swiper-bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/purecounter_vanilla.js')}}"></script>
+
+  <!-- Main JS File -->
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
+{% endblock %}
+

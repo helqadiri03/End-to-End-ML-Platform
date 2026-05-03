@@ -1,0 +1,190 @@
+{% extends "documentation/base_docs.html" %}
+
+{% block doc_title %}Model Download - NextData Platform{% endblock %}
+
+{% block doc_content %}
+<div class="doc-header">
+    <h1>Model Download</h1>
+    <p class="lead">Learn how to download and use pre-trained models from our platform.</p>
+</div>
+
+<div class="feature-card">
+    <div class="card-icon">
+        <i class="bi bi-cloud-download"></i>
+    </div>
+    <div class="card-content">
+        <h2>Quick Start</h2>
+        <p>Download a pre-trained model with just a few lines of code:</p>
+        <div class="code-block">
+            <pre><code>from nextdata.models import ModelDownloader
+
+downloader = ModelDownloader()
+model = downloader.download('xgboost-classifier-v1')</code></pre>
+            <button class="copy-btn">Copy</button>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Download Process</h2>
+    <div class="steps-container">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Choose Model</h3>
+                <p>Select a model from our model registry.</p>
+                <div class="code-block">
+                    <pre><code># List available models
+from nextdata.models import list_models
+
+available_models = list_models()
+print(available_models)</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Download Model</h3>
+                <p>Download the model and its configurations.</p>
+                <div class="code-block">
+                    <pre><code># Download model with specific version
+model = downloader.download(
+    model_name='xgboost-classifier',
+    version='1.0.0',
+    include_weights=True
+)</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Load Model</h3>
+                <p>Load the downloaded model into memory.</p>
+                <div class="code-block">
+                    <pre><code># Load model from file
+from nextdata.models import load_model
+
+model = load_model('path/to/downloaded/model.pkl')
+model.summary()</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h3>Verify Model</h3>
+                <p>Verify the model's integrity and functionality.</p>
+                <div class="code-block">
+                    <pre><code># Run basic model verification
+from nextdata.validation import verify_model
+
+status = verify_model(model)
+print(status.checks_passed)</code></pre>
+                    <button class="copy-btn">Copy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Download Options</h2>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <i class="bi bi-hdd"></i>
+            <h3>Storage Options</h3>
+            <ul>
+                <li>Local filesystem</li>
+                <li>Cloud storage</li>
+                <li>Docker volumes</li>
+                <li>Custom storage</li>
+            </ul>
+        </div>
+        <div class="feature-item">
+            <i class="bi bi-gear"></i>
+            <h3>Configuration</h3>
+            <ul>
+                <li>Model weights</li>
+                <li>Architecture</li>
+                <li>Hyperparameters</li>
+                <li>Dependencies</li>
+            </ul>
+        </div>
+        <div class="feature-item">
+            <i class="bi bi-shield-check"></i>
+            <h3>Security</h3>
+            <ul>
+                <li>Checksum verification</li>
+                <li>Secure transfer</li>
+                <li>Access control</li>
+                <li>Audit logging</li>
+            </ul>
+        </div>
+        <div class="feature-item">
+            <i class="bi bi-arrow-repeat"></i>
+            <h3>Versioning</h3>
+            <ul>
+                <li>Version control</li>
+                <li>Rollback support</li>
+                <li>Update tracking</li>
+                <li>Dependency resolution</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Advanced Features</h2>
+    <div class="resources-grid">
+        <a href="#" class="resource-card">
+            <i class="bi bi-clock-history"></i>
+            <h4>Version History</h4>
+            <p>Track and manage model versions</p>
+        </a>
+        <a href="#" class="resource-card">
+            <i class="bi bi-speedometer2"></i>
+            <h4>Performance Metrics</h4>
+            <p>View model performance statistics</p>
+        </a>
+        <a href="#" class="resource-card">
+            <i class="bi bi-tools"></i>
+            <h4>Model Tools</h4>
+            <p>Utilities for model management</p>
+        </a>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Best Practices</h2>
+    <div class="tips-grid">
+        <div class="tip-card">
+            <i class="bi bi-check2-circle"></i>
+            <h4>Verify Downloads</h4>
+            <p>Always verify model integrity after download</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-folder-check"></i>
+            <h4>Organize Models</h4>
+            <p>Maintain a clear model organization structure</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-clock"></i>
+            <h4>Version Control</h4>
+            <p>Keep track of model versions and updates</p>
+        </div>
+    </div>
+</div>
+
+<div class="info-box">
+    <i class="bi bi-info-circle"></i>
+    <p>Need help with model downloads? Check our <a href="#">troubleshooting guide</a> or contact support.</p>
+</div>
+{% endblock %}

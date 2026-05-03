@@ -1,0 +1,220 @@
+{% extends "documentation/base_docs.html" %}
+
+{% block doc_title %}API Integration Guide - NextData Platform{% endblock %}
+
+{% block doc_content %}
+<div class="doc-header">
+    <h1>API Integration Guide</h1>
+    <p class="lead">Connect your business systems with our platform - no coding expertise required!</p>
+</div>
+
+<div class="content-section">
+    <h2>Understanding API Integration</h2>
+    <div class="info-box">
+        <i class="bi bi-lightbulb"></i>
+        <p>Our API lets your existing business tools work with NextData Platform automatically. Think of it like building a bridge between systems!</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Getting Started</h2>
+    <div class="steps-container">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Get Your API Key</h3>
+                <p>Access your key:</p>
+                <ul>
+                    <li>Go to Account Settings</li>
+                    <li>Click "API Access"</li>
+                    <li>Generate new key</li>
+                    <li>Save it securely</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-shield-lock"></i>
+                    <p>Keep your API key private - it's like a password for your account.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Choose Integration Method</h3>
+                <p>Pick your tool:</p>
+                <ul>
+                    <li>Use our connectors</li>
+                    <li>Connect via Zapier</li>
+                    <li>Use Make (Integromat)</li>
+                    <li>Custom integration</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-puzzle"></i>
+                    <p>Our pre-built connectors make integration easy - no coding needed!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Test Connection</h3>
+                <p>Verify it works:</p>
+                <ul>
+                    <li>Use test environment</li>
+                    <li>Send test request</li>
+                    <li>Check response</li>
+                    <li>Monitor activity</li>
+                </ul>
+                <div class="tip-box">
+                    <i class="bi bi-check-circle"></i>
+                    <p>Always test in our sandbox environment first.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Available Integrations</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <i class="bi bi-cloud-upload"></i>
+            <h3>Data Import</h3>
+            <p>Bring in your data:</p>
+            <ul>
+                <li>Automated uploads</li>
+                <li>Schedule imports</li>
+                <li>Real-time sync</li>
+                <li>Batch processing</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <i class="bi bi-cloud-download"></i>
+            <h3>Data Export</h3>
+            <p>Get your results:</p>
+            <ul>
+                <li>Download results</li>
+                <li>Auto-export</li>
+                <li>Custom formats</li>
+                <li>Scheduled reports</li>
+            </ul>
+        </div>
+
+        <div class="feature-card">
+            <i class="bi bi-gear"></i>
+            <h3>Model Management</h3>
+            <p>Control your models:</p>
+            <ul>
+                <li>Start training</li>
+                <li>Get predictions</li>
+                <li>Update models</li>
+                <li>Monitor status</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Popular Connectors</h2>
+    <div class="connectors-grid">
+        <div class="connector-card">
+            <img src="{{ url_for('static', filename='images/connectors/salesforce.png') }}" alt="Salesforce">
+            <h4>Salesforce</h4>
+            <p>Sync customer data</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+
+        <div class="connector-card">
+            <img src="{{ url_for('static', filename='images/connectors/zapier.png') }}" alt="Zapier">
+            <h4>Zapier</h4>
+            <p>Connect any app</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+
+        <div class="connector-card">
+            <img src="{{ url_for('static', filename='images/connectors/excel.png') }}" alt="Excel">
+            <h4>Excel</h4>
+            <p>Automate spreadsheets</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+
+        <div class="connector-card">
+            <img src="{{ url_for('static', filename='images/connectors/powerbi.png') }}" alt="Power BI">
+            <h4>Power BI</h4>
+            <p>Live dashboards</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Security & Best Practices</h2>
+    <div class="tips-grid">
+        <div class="tip-card">
+            <i class="bi bi-shield-check"></i>
+            <h4>Protect Your Key</h4>
+            <p>Never share your API key or commit it to code repositories</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-speedometer2"></i>
+            <h4>Monitor Usage</h4>
+            <p>Keep track of your API calls and data transfer</p>
+        </div>
+        <div class="tip-card">
+            <i class="bi bi-clock-history"></i>
+            <h4>Regular Updates</h4>
+            <p>Keep your integrations up to date with our latest features</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Common Questions</h2>
+    <div class="faq-section">
+        <div class="faq-item">
+            <h4>How do I get started?</h4>
+            <p>Start by getting your API key from Account Settings, then use our pre-built connectors or integration platforms like Zapier to connect your systems.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Is it secure?</h4>
+            <p>Yes! We use enterprise-grade encryption and security measures to protect your data and API connections.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What can I connect?</h4>
+            <p>You can connect almost any business tool! Use our pre-built connectors or platforms like Zapier to integrate with thousands of applications.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Do I need to code?</h4>
+            <p>No! Our pre-built connectors and integration platforms let you set up connections without any coding.</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Need More Help?</h2>
+    <div class="help-options-grid">
+        <a href="#" class="help-option-card">
+            <i class="bi bi-play-circle"></i>
+            <h4>Video Tutorials</h4>
+            <p>Watch step-by-step guides</p>
+        </a>
+        <a href="#" class="help-option-card">
+            <i class="bi bi-chat-dots"></i>
+            <h4>Live Support</h4>
+            <p>Chat with our experts</p>
+        </a>
+        <a href="#" class="help-option-card">
+            <i class="bi bi-people"></i>
+            <h4>Community</h4>
+            <p>Join our user forum</p>
+        </a>
+    </div>
+</div>
+
+<div class="info-box">
+    <i class="bi bi-tools"></i>
+    <p>Need help setting up an integration? Our team can help! <a href="#">Schedule a consultation</a> or try our <a href="#">Integration Assistant</a>.</p>
+</div>
+{% endblock %}

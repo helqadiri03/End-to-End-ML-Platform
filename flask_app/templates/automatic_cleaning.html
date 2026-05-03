@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Data Cleaning</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+    .btn-primary, .btn-secondary, .btn-success {
+        background-color: #363994;
+        border: none;
+    } 
+    .btn-secondary:hover, .btn-success:hover {
+        background-color: #3498db;
+    } 
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center mb-4" style="margin-top: 100px;">Automatic Data Cleaning</h2>
+
+        <!-- Messages Flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Affichage des données nettoyées -->
+        {% if data is not none and data.shape[0] > 0 %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Cleaning Data</h5>
+                    <div class="d-flex justify-content-end mb-3">
+                        <a href="{{ url_for('data_cleaning') }}" class="btn btn-secondary me-2">
+                            Back to Upload
+                        </a>
+                        <a href="{{ url_for('download_cleaned_data') }}" class="btn btn-primary">
+                            Download Cleaning Data
+                        </a>
+                    </div>
+                    <div class="table-responsive">
+                        {{ data.head(10).to_html(classes='table table-striped table-bordered table-hover', index=False) | safe }}
+                    </div>
+                    {% if data.shape[0] > 10 %}
+                        <div class="text-muted mt-2">
+                            Display first 10 rows / {{ data.shape[0] }} in Total
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No data to display. Please first
+                <a href="{{ url_for('data_cleaning') }}" class="alert-link">upload a file</a>.
+            </div>
+        {% endif %}
+
+        <!-- Add this after your existing data preview section -->
+        {% if data is not none and original_stats %}
+        <div class="card mt-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Cleaning Summary</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Before and After Stats -->
+                    <div class="col-md-6">
+                        <h5>Dataset Statistics</h5>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Before</th>
+                                    <th>After</th>
+                                    <th>Change</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Total Rows</td>
+                                    <td>{{ original_stats.total_rows }}</td>
+                                    <td>{{ final_stats.total_rows }}</td>
+                                    <td>
+                                        {% set row_diff = original_stats.total_rows - final_stats.total_rows %}
+                                        {% if row_diff > 0 %}
+                                            <span class="text-danger">-{{ row_diff }}</span>
+                                        {% else %}
+                                            <span class="text-success">No change</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Missing Values</td>
+                                    <td>{{ original_stats.null_values }}</td>
+                                    <td>{{ final_stats.null_values }}</td>
+                                    <td>
+                                        {% if original_stats.null_values > 0 %}
+                                            <span class="text-success">All filled</span>
+                                        {% else %}
+                                            <span class="text-success">None found</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Duplicate Rows</td>
+                                    <td>{{ original_stats.duplicates }}</td>
+                                    <td>{{ final_stats.duplicates }}</td>
+                                    <td>
+                                        {% if cleaning_operations.removed_duplicates > 0 %}
+                                            <span class="text-success">Removed {{ cleaning_operations.removed_duplicates }}</span>
+                                        {% else %}
+                                            <span class="text-success">None found</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Cleaning Operations -->
+                    <div class="col-md-6">
+                        <h5>Cleaning Operations Performed</h5>
+                        <div class="list-group">
+                            {% if cleaning_operations.encoded_columns %}
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Encoded Categorical Columns</h6>
+                                <p class="mb-1">{{ cleaning_operations.encoded_columns|join(', ') }}</p>
+                            </div>
+                            {% endif %}
+                            
+                            {% if cleaning_operations.filled_numeric %}
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Filled Numeric Missing Values</h6>
+                                <p class="mb-1">{{ cleaning_operations.filled_numeric|join(', ') }}</p>
+                                <small class="text-muted">Method: Mean value imputation</small>
+                            </div>
+                            {% endif %}
+                            
+                            {% if cleaning_operations.filled_categorical %}
+                            <div class="list-group-item">
+                                <h6 class="mb-1">Filled Categorical Missing Values</h6>
+                                <p class="mb-1">{{ cleaning_operations.filled_categorical|join(', ') }}</p>
+                                <small class="text-muted">Method: Mode value imputation</small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Fade out alerts after 5 seconds
+        $('.alert').delay(5000).fadeOut('slow', function() {
+            $(this).remove();
+        });
+
+        // Optional: Add some hover effects to list group items
+        $('.list-group-item').hover(
+            function() { $(this).addClass('list-group-item-primary'); },
+            function() { $(this).removeClass('list-group-item-primary'); }
+        );
+    });
+    </script>
+{% endblock %}

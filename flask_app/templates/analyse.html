@@ -1,0 +1,114 @@
+{%extends "base.html"%}
+
+{%block head%}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{%block title%}Home{%endblock%}</title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet">
+
+{%endblock%}
+
+{%block content%}
+
+  <div class="container my-5">
+    <!-- Heading -->
+    <div style="margin-top: 140px; display: flex; align-items: center; gap: 10px; padding: 10px 15px; background: #f8f9fa; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); width: fit-content;">
+      <h5 style="margin: 0; font-size: 1rem; color: #495057;">
+        Welcome, <span style="color: #007bff; font-weight: bold;">{{ current_user.username }}</span>
+      </h5>
+      {% if show_messages_button %}
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.9rem; color: #6c757d;">Check your messages:</span>
+        <a href="{{ url_for('messages') }}" class="btn btn-primary d-flex align-items-center justify-content-center"
+           style="background-color: #007bff; color: white; font-size: 0.9rem; padding: 5px 10px; border-radius: 5px; transition: transform 0.3s, box-shadow 0.3s;">
+          <i class="fa-solid fa-message"></i>
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  
+    <h1 class="display-4 fw-bold text-center mb-5" style="margin-top: 50px;">What do you want to analyze today?</h1>
+
+    <!-- File Input Section -->
+    <div class="mb-5">
+      <div class="card shadow-sm" style="border-radius: 15px; border: none;">
+        <div class="card-body d-flex align-items-center" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 20px;">
+          <a href="{{ url_for('chat_with_ai') }}" class="form-control border-0" 
+             style="text-decoration: none; color: #495057; font-weight: bold; background: #ffffff; border-radius: 10px; padding: 10px; transition: 0.3s;">
+            Start a conversation now and add files later...
+          </a>
+          <a href="{{ url_for('chat_with_ai') }}" class="btn btn-primary rounded-circle ms-3 shadow" 
+             style="width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; transition: transform 0.2s;">
+            <i class="bi bi-chat-dots fs-5 text-white"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+
+    <!-- Ready Workflows Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="h4">Or start from ready workflows</h2>
+      <!-- Removed Search Input -->
+    </div>
+
+    <!-- Workflows Horizontal Scroll -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      <!-- Workflow Card 1 -->
+      <div class="card workflow-card" style="margin-right: 8px; width: 310px;">
+        <div class="card-body text-center" >
+          <a href="{{ url_for('data_cleaning') }}" class="clean-link">
+            <div class="card-icon mx-auto">
+              <i><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" id="Clean-Broom-Wipe--Streamline-Plump" height="48" width="48"><desc>Clean Broom Wipe Streamline Icon: https://streamlinehq.com</desc><g id="clean-broom-wipe"><path id="Union" fill="#000000" fill-rule="evenodd" d="M21.4929 20.4302c1.3624 -4.9942 2.7312 -10.0155 3.8479 -15.0777 0.244 -1.10577 -0.0212 -2.45997 -1.3146 -2.94055 -0.2227 -0.08276 -0.4752 -0.16385 -0.7612 -0.24048s-0.5451 -0.13264 -0.7794 -0.17233c-1.3604 -0.2305 -2.2671 0.8097 -2.6088 1.88929 -1.57 4.96166 -2.8996 10.01487 -4.222 15.04077l-0.0191 0.0724c0.0725 -0.0011 0.1451 -0.0016 0.2179 -0.0016 2.143 0 4.0312 0.529 5.6393 1.4302ZM27 28c0 -1.1046 0.8954 -2 2 -2h10c1.1046 0 2 0.8954 2 2s-0.8954 2 -2 2H29c-1.1046 0 -2 -0.8954 -2 -2Zm5 6c-1.1046 0 -2 0.8954 -2 2s0.8954 2 2 2h10c1.1046 0 2 -0.8954 2 -2s-0.8954 -2 -2 -2H32Zm3 8c-1.1046 0 -2 0.8954 -2 2s0.8954 2 2 2h10c1.1046 0 2 -0.8954 2 -2s-0.8954 -2 -2 -2H35ZM15.854 21.5c-6.0445 0 -10.64041 4.5265 -12.11868 10.0676 -0.8858 3.3203 -1.76414 7.2374 -2.09588 10.7226 -0.22296 2.3425 1.51178 4.2737 3.73564 4.5337 1.04229 0.1218 2.3477 0.2588 3.80847 0.3774 -1.70468 -3.6674 -1.81728 -7.5567 -1.60184 -9.3774 0.09734 -0.8227 0.84317 -1.4107 1.66586 -1.3134 0.82273 0.0974 1.41073 0.8432 1.31333 1.6659 -0.2042 1.726 -0.0042 5.9083 2.1639 9.2485 1.0702 0.0469 2.1721 0.0751 3.2753 0.0751 1.1001 0 2.2536 -0.028 3.4118 -0.0746 -1.1388 -1.6277 -1.8216 -3.3934 -2.234 -4.9057 -0.3385 -1.241 -0.5071 -2.3546 -0.5916 -3.1601 -0.0424 -0.4039 -0.0639 -0.7336 -0.0749 -0.9669 -0.0055 -0.1167 -0.0083 -0.2096 -0.0098 -0.2759 -0.0007 -0.0332 -0.0011 -0.0597 -0.0014 -0.0793l-0.0002 -0.0241 0 -0.008 0 -0.0043V38c0 -0.8284 0.6728 -1.5 1.5012 -1.5 0.8271 0 1.4988 0.6705 1.4988 1.4976l0.0001 0.0072 0.0006 0.0374 0.0001 0.0075c0.001 0.0429 0.003 0.1112 0.0073 0.2021 0.0086 0.182 0.0261 0.454 0.0618 0.7948 0.0718 0.6841 0.2157 1.633 0.5022 2.6837 0.5132 1.8818 1.4468 3.9584 3.1158 5.4861 0.8483 -0.0582 1.6679 -0.1212 2.437 -0.1849 3.5406 -0.293 4.9512 -4.5494 2.4815 -6.9733l-1.106 -1.0855c-1.085 -1.0648 -1.6813 -2.531 -1.6476 -4.0509l0.0569 -2.5694C25.5311 26.8706 21.8234 21.5 15.854 21.5Z" clip-rule="evenodd" stroke-width="1"></path></g></svg></i>
+            </div>
+            <h5 class="card-title">Data Cleaner</h5>
+            <p class="card-text text-muted">Methodically clean your data</p>
+          </a>
+        </div>
+      </div>
+      <!-- Workflow Card 2 -->
+      <div class="card workflow-card" style="margin-right: 8px; width: 310px;">
+        <div class="card-body text-center">
+          <a href="{{ url_for('visualization') }}" class="clean-link">
+            <div class="card-icon mx-auto">
+              <i><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" id="Graph-Dot--Streamline-Plump" height="48" width="48"><desc>Graph Dot Streamline Icon: https://streamlinehq.com</desc><g id="graph-dot--product-data-bars-analysis-analytics-graph-business-chart-dot"><path id="Union" fill="#000000" d="M5 3c0 -1.10457 -0.89543 -2 -2 -2s-2 0.89543 -2 2c0 16.3259 0.30176 32.3459 0.43665 38.6921 0.05678 2.671 2.2003 4.8145 4.87121 4.8712C12.6541 46.6982 28.6741 47 45 47c1.1046 0 2 -0.8954 2 -2s-0.8954 -2 -2 -2c-16.2844 0 -32.2718 -0.3011 -38.60714 -0.4357 -0.52836 -0.0113 -0.94588 -0.4288 -0.95711 -0.9572 -0.03091 -1.4541 -0.07059 -3.4169 -0.11338 -5.775 2.2941 -4.3222 5.55943 -8.9235 8.29553 -12.4896 0.4615 -0.6014 0.9063 -1.1715 1.3271 -1.7036 0.6411 0.2336 1.3331 0.3611 2.055 0.3611 1.0495 0 2.036 -0.2694 2.8942 -0.7429 2.1161 1.72 4.3086 3.3159 6.2173 4.6373 0.3597 0.249 0.7103 0.489 1.0495 0.7189 -0.1053 0.4451 -0.161 0.9094 -0.161 1.3867 0 3.3137 2.6863 6 6 6s6 -2.6863 6 -6c0 -2.0024 -0.9809 -3.7757 -2.4884 -4.8656 0.9206 -2.8776 1.9155 -5.6527 2.7972 -7.9913 0.1494 -0.3963 0.2955 -0.7797 0.4371 -1.1484 0.0843 0.0035 0.169 0.0053 0.2541 0.0053 3.3137 0 6 -2.6863 6 -6 0 -3.31371 -2.6863 -6 -6 -6s-6 2.68629 -6 6c0 1.79343 0.7869 3.4031 2.0342 4.5026 -0.1515 0.3939 -0.3079 0.8043 -0.4682 1.2293 -0.9039 2.3974 -1.9359 5.2746 -2.894 8.2769 -1.2548 0.0676 -2.4072 0.5208 -3.3407 1.2432 -0.3057 -0.2075 -0.6206 -0.4232 -0.943 -0.6464 -1.832 -1.2683 -3.8785 -2.7599 -5.8312 -4.339C22.8426 17.5673 23 16.802 23 16c0 -3.3137 -2.6863 -6 -6 -6s-6 2.6863 -6 6c0 1.1318 0.3134 2.1904 0.8581 3.0938 -0.4471 0.5648 -0.9212 1.1719 -1.4137 1.8138 -1.63673 2.1332 -3.49472 4.6746 -5.24591 7.3449C5.09285 20.9947 5 12.0431 5 3Z" stroke-width="1"></path></g></svg></i>
+            </div>
+            <h5 class="card-title">Quick Visualization</h5>
+            <p class="card-text text-muted">Visually explore your data</p>
+          </a>
+        </div>
+      </div>
+      <!-- Workflow Card 3 -->
+      <div class="card workflow-card" style="margin-right: 8px; width: 310px;">
+        <div class="card-body text-center">
+          <a href="{{ url_for('models') }}" class="clean-link">
+            <div class="card-icon mx-auto">
+              <i><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" id="Deepfake-Technology-1--Streamline-Plump" height="48" width="48"><desc>Deepfake Technology 1 Streamline Icon: https://streamlinehq.com</desc><g id="deepfake-technology-1--automated-face-head-fake-generated-artificial-intelligence-ai"><path id="Union" fill="#000000" fill-rule="evenodd" d="M23.5 2.5c-0.8284 0 -1.5 0.67157 -1.5 1.5v10.25h-3.2751l-3.555 -3.555c0.2128 -0.5232 0.3301 -1.09538 0.3301 -1.695 0 -2.48528 -2.0147 -4.5 -4.5 -4.5 -2.48528 0 -4.5 2.01472 -4.5 4.5 0 2.4853 2.01472 4.5 4.5 4.5 0.5996 0 1.1718 -0.1173 1.695 -0.3301l4.0676 4.0675c0.3282 0.3282 0.7733 0.5126 1.2374 0.5126h4v4.5H10.147C9.46429 20.634 7.86458 19.5 6 19.5c-2.48528 0 -4.5 2.0147 -4.5 4.5s2.01472 4.5 4.5 4.5c1.86458 0 3.46429 -1.134 4.147 -2.75H22v5.5h-5c-0.4641 0 -0.9092 0.1844 -1.2374 0.5126l-4.0676 4.0675C11.1718 35.6173 10.5996 35.5 10 35.5c-2.48528 0 -4.5 2.0147 -4.5 4.5s2.01472 4.5 4.5 4.5c2.4853 0 4.5 -2.0147 4.5 -4.5 0 -0.5996 -0.1173 -1.1718 -0.3301 -1.695l3.555 -3.555H22v10.1167c0 0.8284 0.6716 1.5 1.5 1.5H32c0.8284 0 1.5 -0.6716 1.5 -1.5v-3.7553l2.9182 0.4921c2.5958 0.4378 5.0115 -1.4364 5.2324 -4.0596l0.4848 -5.7559c1.4983 -0.4484 2.6405 -1.0394 3.4516 -1.5639 1.6389 -1.0597 1.6498 -3.0814 0.7767 -4.3738l-3.9182 -5.7999C41.7043 10.2336 33.5058 2.5 23.5 2.5Z" clip-rule="evenodd" stroke-width="1"></path></g></svg></i>
+            </div>
+            <h5 class="card-title">Significance Testing</h5>
+            <p class="card-text text-muted">Run significance tests</p>
+          </a>
+        </div>
+      </div>
+      <!-- Workflow Card 4 -->
+      <div class="card workflow-card" style="margin-right: 8px; width: 310px;">
+        <div class="card-body text-center">
+          <a href="{{ url_for('generate_report') }}" class="clean-link">
+            <div class="card-icon mx-auto">
+              <i><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" id="Table--Streamline-Plump" height="48" width="48"><desc>Table Streamline Icon: https://streamlinehq.com</desc><g id="table"><path id="Union" fill="#000000" fill-rule="evenodd" d="M46.317 14.25a151.452 151.452 0 0 0 -0.36 -6.114c-0.268 -3.288 -2.805 -5.825 -6.093 -6.092C36.593 1.778 31.402 1.5 24 1.5c-2.708 0 -5.12 0.037 -7.25 0.097l0 12.653 29.567 0ZM8.136 2.044c1.364 -0.11 3.062 -0.224 5.114 -0.318l0 12.524 -11.567 0c0.101 -2.507 0.233 -4.535 0.361 -6.114 0.267 -3.288 2.804 -5.825 6.092 -6.092Zm-6.092 37.82c-0.128 -1.58 -0.26 -3.607 -0.36 -6.114H13.25v12.524a145.71 145.71 0 0 1 -5.114 -0.318c-3.288 -0.267 -5.825 -2.804 -6.092 -6.092ZM16.75 33.75v12.653c2.13 0.06 4.542 0.097 7.25 0.097 7.402 0 12.593 -0.278 15.864 -0.544 3.288 -0.267 5.825 -2.804 6.092 -6.092 0.129 -1.58 0.26 -3.607 0.361 -6.114H16.75ZM46.5 24c0 2.293 -0.027 4.373 -0.071 6.25l-29.679 0v-12.5l29.679 0c0.044 1.877 0.071 3.957 0.071 6.25ZM1.571 17.75A262.582 262.582 0 0 0 1.5 24c0 2.293 0.027 4.373 0.071 6.25H13.25v-12.5H1.571Z" clip-rule="evenodd" stroke-width="1"></path></g></svg></i>
+            </div>
+            <h5 class="card-title">Download Report</h5>
+            <p class="card-text text-muted">Summarize all steps</p>
+          </a>
+        </div>
+      </div>
+      <!-- Add more cards as needed -->
+    </div>
+  </div>
+{%block script%}
+<script src="{{url_for('static', filename='js/script.js')}}"></script>
+{%endblock%}
+{%endblock%}

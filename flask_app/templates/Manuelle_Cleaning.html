@@ -1,0 +1,260 @@
+
+
+{% extends "base.html" %}
+
+{% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Cleaning</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+{% endblock %}
+{% block content %}
+    <div class="container-fluid mt-3" >
+        <h2 class="text-center mb-4" style="margin-top: 100px;">Manual Data Cleaning</h2>
+
+        <!-- Navigation Tabs -->
+        <ul class="nav nav-pills mb-3 justify-content-center" id="cleaningTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="pill" href="#preview">Data Preview</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#columns">Column Management</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#numeric">Numeric Values</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#categorical">Categorical Values</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="pill" href="#duplicates">Duplicates</a>
+            </li>
+        </ul>
+        
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Data Preview Tab -->
+            <div class="tab-pane fade show active" id="preview">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Data Preview</h5>
+                        <a href="{{ url_for('download_cleaned_data') }}" class="btn btn-primary">
+                            <i class="bi bi-download"></i> Download Current Data
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            {{ data.to_html(classes='table table-bordered table-hover', index=False) | safe if data is not none }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column Management Tab -->
+            <div class="tab-pane fade" id="columns">
+                <div class="card modification-card">
+                    <div class="card-header">
+                        <h5>Delete Columns</h5>
+                    </div>
+                    {% if high_null_columns %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong><i class="fas fa-exclamation-triangle"></i> Warning!</strong> 
+                        Some columns contain more than 40% null values.
+                        <button class="btn btn-link text-decoration-none p-0" type="button" data-bs-toggle="collapse" data-bs-target="#nullColumnsList" aria-expanded="false" aria-controls="nullColumnsList">
+                            View Details
+                        </button>
+                        <div class="collapse mt-3" id="nullColumnsList">
+                            <table class="table table-sm table-striped table-bordered">
+                                <thead class="table-warning">
+                                    <tr>
+                                        <th>Column Name</th>
+                                        <th>Null Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for column in high_null_columns %}
+                                    <tr>
+                                        <td>{{ column }}</td>
+                                        <td>
+                                            <div class="progress">
+                                                <div 
+                                                    class="progress-bar bg-danger" 
+                                                    role="progressbar" 
+                                                    style="width: {{ null_percentage[column] }}%;" 
+                                                    aria-valuenow="{{ null_percentage[column] }}" 
+                                                    aria-valuemin="0" 
+                                                    aria-valuemax="100">
+                                                    {{ null_percentage[column]|round(2) }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="card-body">
+                        <form method="POST" id="columnForm">
+                            <div class="row">
+                                {% for column in all_columns %}
+                                <div class="col-md-3 mb-2">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="columns_to_remove" value="{{ column }}">
+                                        <label class="form-check-label">{{ column }}</label>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <button type="submit" class="btn btn-danger mt-3">Delete Selected Columns</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Numeric Values Tab -->
+            <div class="tab-pane fade" id="numeric">
+                <div class="card modification-card">
+                    <div class="card-header">
+                        <h5>Handle Numeric Missing Values</h5>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Info!</strong> Select the method to handle numeric missing values for each column.
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="{{url_for('static', filename='images/histplot.png')}}" alt="Histogram Plot" style="width:100%;">
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Description:</h5>
+                            <p>**Filling with the Mean:** This method is appropriate when the dataset follows a normal distribution, as the mean accurately represents the central tendency of the data. It is particularly useful when there are no extreme outliers that could skew the average.</p>
+                            <p>**Filling with the Median:** This approach is ideal for datasets that are skewed or contain significant outliers. The median, being the middle value, provides a more robust representation of the central tendency in such cases, minimizing the influence of extreme values.</p>
+                            <p>Based on the provided histogram, it appears that the data for the variable <strong>buy_price</strong> is right-skewed (positively skewed) with outliers in the upper range. Here are some recommendations for filling missing values:</p>
+                            <ul>
+                                <li><strong>Fill with the Median:</strong></li>
+                                <p>
+                                    <strong>Why?</strong> The median is robust to outliers, making it a good option for skewed data like this. It better represents the true central tendency of the data compared to the mean in such cases.
+                                </p>
+                            </ul>                            
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% for column in numeric_null_columns %}
+                            <div class="mb-3">
+                                <label class="form-label">{{ column }}</label>
+                                <select class="form-select" name="numeric_fill_method" required>
+                                    <option value="mean">Mean</option>
+                                    <option value="median">Median</option>
+                                </select>                                
+                                <button type="button" class="btn btn-info mt-2 generate-plot" data-column="{{ column }}">
+                                    View Distribution
+                                </button>
+                            </div>
+                            {% endfor %}
+                            {% if not numeric_null_columns %}
+                            <p class="text-muted">No numeric columns with missing values found.</p>
+                            {% endif %}
+                            <button type="submit" class="btn btn-primary">Apply Changes</button>
+                        </form>
+                        <div id="plot-container" class="mt-4">
+                            <div id="plot-output" class="text-center"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categorical Values Tab -->
+            <div class="tab-pane fade" id="categorical">
+                <div class="card modification-card">
+                    <div class="card-header">
+                        <h5>Handle Categorical Missing Values</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            {% for column in categorical_null_columns %}
+                            <div class="mb-3">
+                                <label class="form-label">{{ column }}</label>
+                                <select class="form-select" name="categorical_fill_method">
+                                    <option value="mode">Mode (Most Frequent)</option>
+                                    <option value="bfill">Backward Fill</option>
+                                </select>
+                            </div>
+                            {% else %}
+                            <p class="text-muted">No categorical columns with missing values found.</p>
+                            {% endfor %}
+                            
+                            <button type="submit" class="btn btn-primary">Apply Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Duplicates Tab -->
+            <div class="tab-pane fade" id="duplicates">
+                <div class="card modification-card">
+                    <div class="card-header">
+                        <h5>Duplicate Rows Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <h6>Statistics Before Cleaning:</h6>
+                            <ul class="list-unstyled">
+                                <li>Original Dataset: {{ original_row_count }} rows</li>
+                                <li>Duplicated Rows: {{ duplicated_count_before }} rows</li>
+                            </ul>
+                            <h6>Statistics After Cleaning:</h6>
+                            <ul class="list-unstyled">
+                                <li>Current Dataset: {{ current_row_count_after }} rows</li>
+                                <li>Duplicated Rows: {{ duplicated_count_after }} rows</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+
+        <!-- Fixed Action Buttons -->
+        <div class="action-buttons">
+            <a href="{{ url_for('data_cleaning') }}" class="btn btn-secondary me-2">Back to Upload</a>
+            <a href="{{ url_for('download_cleaned_data') }}" class="btn btn-success">
+                Download Cleaned Data
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+            // Histogram generation code
+            document.querySelectorAll('.generate-plot').forEach(button => {
+                button.addEventListener('click', function() {
+                    const columnName = this.dataset.column;
+                    fetch(`/generate_histogram/${columnName}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const plotContainer = document.getElementById('plot-output');
+                            if (data.error) {
+                                plotContainer.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                            } else {
+                                plotContainer.innerHTML = `<img src="data:image/png;base64,${data.plot}" 
+                                                             class="img-fluid" alt="Histogram for ${columnName}">`;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching plot:', error);
+                        });
+                });
+            });
+        });
+    </script>
+    {% endblock %}

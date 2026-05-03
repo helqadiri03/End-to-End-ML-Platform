@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}{% endblock %}
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link href="{{url_for('static', filename='images/data_logo.png')}}" rel="icon">
+    <link href="{{url_for('static', filename='images/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/aos.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+    <style>
+        .Btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition-duration: .3s;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+  background-color: rgb(46, 110, 208);
+}
+
+.Btn .sign {
+  width: 100%;
+  transition-duration: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Btn .sign svg {
+  width: 17px;
+}
+
+.Btn .sign svg path {
+  fill: white;
+}
+
+.Btn .text {
+  position: absolute;
+  right: 0%;
+  width: 0%;
+  opacity: 0;
+  color: white;
+  font-size: 1.2em;
+  font-weight: 600;
+  transition-duration: .3s;
+}
+
+.Btn:hover {
+  width: 125px;
+  border-radius: 40px;
+  transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+  width: 30%;
+  transition-duration: .3s;
+  padding-left: 20px;
+}
+
+.Btn:hover .text {
+  opacity: 1;
+  width: 70%;
+  transition-duration: .3s;
+  padding-right: 10px;
+}
+
+.Btn:active {
+  transform: translate(2px ,2px);
+}
+
+.logout-link {
+  text-decoration: none;
+}
+
+.login-btn {
+  background-color: rgb(46, 110, 208) !important;
+}
+
+.login-link, .logout-link {
+  text-decoration: none;
+}
+
+.header {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 8px 0;
+    box-shadow: none;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header .logo img {
+    height: 35px;
+}
+
+.navmenu ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navmenu ul li a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 15px;
+}
+
+.navmenu ul li a:hover {
+    color: #0d6efd;
+}
+
+.docs-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.docs-icon svg {
+    width: 24px;
+    height: 24px;
+}
+@media print {
+    .header, .footer {
+        display: none;
+    }
+}
+
+    </style>
+
+</head>
+<body>
+    <header id="header" class="header d-flex align-items-center fixed-top">
+        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+            <a href="{{ url_for('index') }}" class="logo d-flex align-items-center">
+                <img src="{{ url_for('static', filename='images/data_logo.png') }}" alt="Logo">
+                <h1>NextData</h1>
+            </a>
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li><a href="{{ url_for('index') }}" class="{{ 'active' if request.endpoint == 'index' }}">Home</a></li>
+                    <li><a href="{{ url_for('index') }}#features" class="{{ 'active' if request.endpoint == 'index' and request.view_args.get('_anchor') == 'features' }}">Features</a></li>
+                    <li><a href="{{ url_for('index') }}#services" class="{{ 'active' if request.endpoint == 'index' and request.view_args.get('_anchor') == 'services' }}">Services</a></li>
+                    <li><a href="{{ url_for('index') }}#contact" class="{{ 'active' if request.endpoint == 'index' and request.view_args.get('_anchor') == 'contact' }}">Contact</a></li>
+                    <li>
+                        <a href="{{ url_for('documentation') }}" class="docs-icon">
+                            <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-x336ft" focusable="false" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M 14.144067,9.7268324 V 7.9032334 A 9.420499,9.420499 0 0 1 15.954794,7.340063 9.7530375,9.7530375 0 0 1 17.898536,7.1523396 c 0.46448,0 0.920381,0.035398 1.367699,0.1072704 0.447318,0.071871 0.884983,0.1609058 1.314064,0.2681765 V 9.2441151 C 20.151218,9.0832093 19.717844,8.9630662 19.28018,8.8826134 A 7.6129902,7.6129902 0 0 0 17.898536,8.7613976 c -0.679023,0 -1.3323,0.085816 -1.957688,0.2553038 a 8.6234787,8.6234787 0 0 0 -1.796781,0.710131 z m 0,5.8998796 v -1.823599 a 9.420499,9.420499 0 0 1 1.810727,-0.563169 9.7530375,9.7530375 0 0 1 1.943742,-0.187725 c 0.46448,0 0.920381,0.0354 1.367699,0.107272 0.447318,0.07188 0.884983,0.160904 1.314064,0.268176 v 1.716328 C 20.151218,14.983089 19.717844,14.862946 19.28018,14.782494 a 7.6162083,7.6162083 0 0 0 -1.381644,-0.121216 7.8307495,7.8307495 0 0 0 -1.957688,0.241358 7.420976,7.420976 0 0 0 -1.796781,0.724076 z m 0,-2.949939 v -1.823599 a 9.420499,9.420499 0 0 1 1.810727,-0.563171 9.7530375,9.7530375 0 0 1 1.943742,-0.187723 c 0.46448,0 0.920381,0.0354 1.367699,0.107271 0.447318,0.07188 0.884983,0.160905 1.314064,0.268175 v 1.71633 c -0.429081,-0.160907 -0.862455,-0.28105 -1.300119,-0.361502 a 7.6129902,7.6129902 0 0 0 -1.381644,-0.121215 c -0.679023,0 -1.3323,0.08581 -1.957688,0.255303 a 8.6234787,8.6234787 0 0 0 -1.796781,0.710131 z m -8.0452911,3.593563 a 10.673418,10.673418 0 0 1 2.4543499,0.281049 c 0.7948748,0.187723 1.5865312,0.469845 2.3728242,0.845292 V 6.8305279 C 10.193293,6.4014458 9.415581,6.0796341 8.5928159,5.865093 A 9.842072,9.842072 0 0 0 4.1818513,5.7310049 9.2928468,9.2928468 0 0 0 2.3443071,6.2941752 V 16.91396 c 0.6253871,-0.214542 1.2475563,-0.375448 1.8643618,-0.482718 0.6168057,-0.107271 1.2464837,-0.160906 1.890107,-0.160906 z m 6.9725861,1.126341 a 11.810487,11.810487 0 0 1 2.373896,-0.845292 11.02312,11.02312 0 0 1 4.344457,-0.120143 c 0.616806,0.10727 1.237902,0.268176 1.86329,0.482718 V 6.2941752 A 9.2982104,9.2982104 0 0 0 19.816532,5.7310049 9.8967804,9.8967804 0 0 0 15.404495,5.865093 c -0.822764,0.2145411 -1.600476,0.5363528 -2.333133,0.9654349 z m -1.072706,3.16448 a 10.296899,10.296899 0 0 0 -2.7890344,-1.58224 8.7886753,8.7886753 0 0 0 -3.1108457,-0.56317 c -0.9471989,0 -1.9394514,0.179141 -2.9767575,0.536352 A 9.4076265,9.4076265 0 0 0 0.19889616,20.614793 V 5.060564 C 0.98518927,4.5242113 1.910934,4.1133651 2.9750578,3.8269528 a 11.620618,11.620618 0 0 1 6.168056,-0.026818 c 0.9922522,0.2681763 1.9437422,0.6704408 2.8555422,1.2067935 a 11.563764,11.563764 0 0 1 5.89988,-1.609058 c 1.019069,0 2.060667,0.1426698 3.124791,0.4290821 1.063051,0.2864123 1.988795,0.6972585 2.775088,1.2336111 V 20.614793 a 9.0557789,9.0557789 0 0 0 -2.909176,-1.662694 c -1.045888,-0.357211 -2.043505,-0.536352 -2.990703,-0.536352 -1.072705,0 -2.110012,0.187723 -3.110845,0.56317 a 10.297972,10.297972 0 0 0 -2.789035,1.58224 z" fill="currentColor"></path>
+                            </svg>
+                            Documentation
+                        </a>
+                    </li>
+                    <li>
+                        {% if current_user.is_authenticated %}
+                            <li>
+                                <a href="{{ url_for('analyse') }}" class="login-link">
+                                    Analyse
+                                </a>
+                            </li>
+                            <a href="{{ url_for('auth.logout') }}" class="logout-link">
+                                <button class="Btn">
+                                    <div class="sign">
+                                        <svg viewBox="0 0 512 512">
+                                            <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="text">Logout</div>
+                                </button>
+                            </a>
+                            {% else %}
+                            <a href="{{ url_for('auth.login') }}" class="login-link">
+                                <button class="Btn login-btn">
+                                    <div class="sign">
+                                        <svg viewBox="0 0 512 512">
+                                            <path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="text">Login</div>
+                                </button>
+                            </a>
+                        {% endif %}
+                    </li>
+                        
+                </ul>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Block -->
+    <main >
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer Block -->
+    {% block footer %}
+    <footer id="footer" class="footer" style="margin-top: 200px;">
+        <div class="container footer-top">
+            <div class="row gy-4">
+                <div class="col-lg- col-md-6 footer-about">
+                    <a href="{{ url_for('index') }}" class="logo d-flex align-items-center">
+                        <span class="sitename">NextData</span>
+                    </a>
+                    <div class="footer-contact pt-3">
+                        <p>Tangier , Morocco</p>
+                        <p><strong>Phone:</strong> +212 6 54 34 31 54</p>
+                        <p><strong>Email:</strong> info@gmail.com</p>
+                    </div>
+                    <div class="social-links d-flex mt-4">
+                        <a href=""><i class="bi bi-twitter"></i></a>
+                        <a href=""><i class="bi bi-facebook"></i></a>
+                        <a href=""><i class="bi bi-instagram"></i></a>
+                        <a href=""><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-3 footer-links">
+                    <h4>Useful Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Terms of service</a></li>
+                        <li><a href="#">Privacy policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-3 footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#">Data Analysis</a></li>
+                        <li><a href="#">Web Scraping</a></li>
+                        <li><a href="#">Machine Learning Models</a></li>
+                        <li><a href="#">Building AI Assistance</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center mt-4">
+            <p> <strong>NextData</strong> All Rights Reserved</p>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block script %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle navigation links
+    document.querySelectorAll('a[href^="' + "{{ url_for('index') }}" + '#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            // If not on index page, redirect to index with anchor
+            if (window.location.pathname !== '/') {
+                window.location.href = this.href;
+                return;
+            }
+            
+            // Smooth scroll to section
+            const targetId = this.getAttribute('href').split('#')[1];
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+                
+                // Update active class
+                document.querySelectorAll('.navmenu a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+</body>
+</html>

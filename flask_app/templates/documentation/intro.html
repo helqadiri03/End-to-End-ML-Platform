@@ -1,0 +1,118 @@
+{% extends "documentation/base_docs.html" %}
+
+{% block doc_title %}Introduction - NextData Platform{% endblock %}
+
+{% block doc_content %}
+<div class="doc-header">
+    <h1>Introduction</h1>
+    <p class="lead">Welcome to the NextData Platform documentation. This comprehensive guide will help you understand and utilize all the powerful features available in our data analysis and machine learning platform.</p>
+</div>
+
+<div class="feature-card">
+    <div class="card-icon">
+        <i class="bi bi-play-circle"></i>
+    </div>
+    <div class="card-content">
+        <h2>Quick Start Video</h2>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <p>Get started quickly with our platform walkthrough video.</p>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Overview</h2>
+    <p>NextData Platform is a powerful web-based tool that enables you to:</p>
+    <div class="feature-grid">
+        <div class="feature-item">
+            <i class="bi bi-cloud-upload"></i>
+            <h3>Data Management</h3>
+            <p>Upload and manage your datasets with ease</p>
+        </div>
+        <div class="feature-item">
+            <i class="bi bi-brush"></i>
+            <h3>Data Cleaning</h3>
+            <p>Clean and preprocess data automatically or manually</p>
+        </div>
+        <div class="feature-item">
+            <i class="bi bi-graph-up"></i>
+            <h3>Visualization</h3>
+            <p>Create beautiful and insightful visualizations</p>
+        </div>
+        <div class="feature-item">
+            <i class="bi bi-cpu"></i>
+            <h3>Machine Learning</h3>
+            <p>Train and evaluate machine learning models</p>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Getting Started</h2>
+    <div class="steps-container">
+        <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>Installation</h3>
+                <p>Begin by installing NextData Platform. Follow our <a href="{{ url_for('documentation_page', page='installation') }}">installation guide</a> for detailed instructions.</p>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>Upload Data</h3>
+                <p>Upload your first dataset using our intuitive <a href="{{ url_for('documentation_page', page='data-upload') }}">data upload interface</a>.</p>
+            </div>
+        </div>
+        <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>Explore Features</h3>
+                <p>Discover all available features in our <a href="{{ url_for('documentation_page', page='features') }}">features overview</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-section">
+    <h2>Need Help?</h2>
+    <div class="resources-grid">
+        <a href="#" class="resource-card">
+            <i class="bi bi-chat-dots"></i>
+            <h4>Community Forum</h4>
+            <p>Join our community discussions</p>
+        </a>
+        <a href="#" class="resource-card">
+            <i class="bi bi-envelope"></i>
+            <h4>Support</h4>
+            <p>Contact our technical support team</p>
+        </a>
+        <a href="#" class="resource-card">
+            <i class="bi bi-github"></i>
+            <h4>GitHub</h4>
+            <p>View source code and report issues</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block on_this_page %}
+<ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#getting-started">Getting Started</a>
+        <ul>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#upload-data">Upload Data</a></li>
+            <li><a href="#explore-features">Explore Features</a></li>
+        </ul>
+    </li>
+    <li><a href="#need-help">Need Help?</a>
+        <ul>
+            <li><a href="#community-forum">Community Forum</a></li>
+            <li><a href="#support">Support</a></li>
+            <li><a href="#github">GitHub</a></li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}

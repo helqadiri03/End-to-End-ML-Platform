@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learn About Data Cleaning Methods</title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<style>
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+    .card h3 {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    .card p {
+        font-size: 1.2em;
+    }
+    .list-group-item {
+        font-size: 1.2em;
+    }
+    .text-primary {
+        color: #1e3b5a;
+    }
+    .text-muted {
+        color: #6c757d;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary" style="margin-top: 100px;">Welcome to the Data Cleaning Guide</h1>
+    
+    <p class="lead text-center text-muted">
+        Data cleaning is an essential step in the data analysis process. In this guide, we'll explore both automatic and manual methods of data cleaning, giving you tools to enhance your datasets.
+    </p>
+
+    <!-- Row for Automatic and Manual Cleaning -->
+    <div class="row mt-5">
+        <!-- Automatic Data Cleaning -->
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm border-primary">
+                <h3 class="text-center text-primary">Automatic Data Cleaning</h3>
+                <p class="text-muted">
+                    Automatic cleaning methods are great for handling common issues such as missing values and duplicates quickly. For example, null values can be automatically filled using the mean or median of the column. While this method saves time, it may introduce errors if not carefully applied.
+                </p>
+                <p class="text-muted">
+                    Be cautious when using automatic methods, especially for replacing null values with statistical measures like the mean or median. These methods can be helpful, but they may not always reflect the context of the data.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Manual Data Cleaning -->
+        <div class="col-md-6">
+            <div class="card p-4 shadow-sm border-primary">
+                <h3 class="text-center text-primary">Manual Data Cleaning</h3>
+                <p class="text-muted">
+                    While automatic cleaning is fast, manual cleaning allows for more control and precision. You can examine your data closely through visualizations to spot potential issues, such as outliers or skewed distributions.
+                </p>
+                <p class="text-muted">
+                    For example, graphs can help you identify unusual patterns. Based on these observations, you can make informed decisions about how to handle missing values or correct data anomalies. This method is slower but ensures that your cleaning process aligns with the context of your dataset.
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <h3 class="mt-5 text-center text-primary">Visualize Your Data</h3>
+    <p class="text-center text-muted">
+        Visualizing your data can help you identify key issues in your dataset. Below, you can interact with a simple graph that will display trends or anomalies in your data.
+    </p>
+    <div id="graph" class="my-4 text-center"></div>
+
+</div>
+
+{% endblock %}
