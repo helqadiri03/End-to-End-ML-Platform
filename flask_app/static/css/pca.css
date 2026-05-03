@@ -1,0 +1,54 @@
+.btn.btn-outline-primary {
+    color: #365486;
+    background-color: transparent;
+    border: 1px solid #365486;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #365486;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.graph-container {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 400px;
+}
+
+.graph-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.modal-dialog.modal-lg {
+    max-width: 90%;
+}
+
+.modal-body {
+    height: 70vh;
+    padding: 20px;
+}
+
+.download-btn {
+    margin-top: 1rem;
+}
+
+#modalScreenPlot {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.modal-footer {
+    justify-content: center;
+    padding: 1rem;
+}

@@ -1,0 +1,428 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.search {
+    top: 6px;
+    left: 10px;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    padding-left: 32px;
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.table {
+    margin-top: 1rem;
+    margin-bottom: 0;
+    border-spacing: 0 0.5rem !important;
+}
+
+.table thead tr {
+    background-color: #f8f9fa;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border: none;
+    border-bottom: 2px solid #dee2e6;
+    color: #495057;
+    font-weight: 600;
+    padding: 1rem;
+}
+
+.table tbody tr {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+    border-radius: 5px;
+}
+
+.table tbody tr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;
+}
+
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    border: none;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-secondary);
+    border-color: var(--color-secondary);
+    transform: translateY(-1px);
+}
+
+.alert {
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    color: #0c5460;
+}
+
+.alert-danger {
+    background-color: #fff3f3;
+    color: #721c24;
+}
+
+.alert-success {
+    background-color: #f0fff4;
+    color: #155724;
+}
+
+.model-card {
+    position: relative;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    margin-bottom: 0.5rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.model-header {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.model-header.expanded {
+    background-color: #e9ecef;
+}
+
+.model-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+    white-space: normal;
+    overflow: visible;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.model-steps {
+    position: relative;
+    z-index: 0;
+    background: white;
+    border-left: 2px solid #e9ecef;
+    padding: 10px 10px 10px 30px;
+    transition: none !important;
+}
+
+.model-steps.hidden {
+    max-height: 0;
+    display: none;
+}
+
+.model-steps.show {
+    max-height: 500px;
+    display: block;
+    padding: 10px 10px 10px 30px;
+}
+
+.model-steps[style*="display: block"] {
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+}
+
+.step i {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.step.waiting {
+    color: #6c757d;
+    background-color: #f8f9fa;
+}
+
+.step.waiting i {
+    color: #adb5bd;
+}
+
+.step.loading {
+    color: #0F1035;
+    background-color: #f8f9fa;
+    border-left: 3px solid #007bff;
+}
+
+.step.loading i {
+    color: #0F1035;
+}
+
+.step.complete, .step.success {
+    color: #198754;
+    background-color: #f0fff4;
+    border-left: 3px solid #22C55E;
+}
+
+.step.complete i {
+    color: #22C55E;
+}
+
+.step.error {
+    color: #dc3545;
+    background-color: #fff5f5;
+    border-left: 3px solid #dc3545;
+}
+
+.step.error i {
+    color: #dc3545;
+}
+
+#training-alert {
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    background-color: #cfe2ff;
+    border: 1px solid #b6d4fe;
+    color: #084298;
+}
+
+#training-alert h4 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.model-steps.show ~ .model-header .toggle-icon {
+    transform: rotate(90deg);
+}
+
+.model-status {
+    margin-left: auto;
+    font-size: 0.875rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.text-success {
+    color: #28a745;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.step-message {
+    font-size: 0.9rem;
+    color: #666;
+    margin-left: 0.5rem;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .model-header h3 {
+        font-size: 1rem;
+    }
+    
+    .step {
+        padding: 0.75rem;
+    }
+}
+
+/* Search input styling */
+.search-container {
+    position: relative;
+    max-width: 300px;
+    margin-bottom: 1.5rem;
+}
+
+.search-container .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.search-input:focus {
+    border-color: #365486;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(54, 84, 134, 0.25);
+}
+
+/* Results table styling */
+.results-container {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Update button styling */
+.btn.btn-outline-primary {
+    color: #365486;
+    background-color: transparent;
+    border: 1px solid #365486;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn.btn-outline-primary:hover {
+    color: #ffffff;
+    background-color: #0F1035;
+    border-color: #0F1035;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(15, 16, 53, 0.15);
+}
+
+.btn.btn-outline-primary:active {
+    color: #ffffff;
+    background-color: #0F1035;
+    border-color: #365486;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(15, 16, 53, 0.1);
+}
+
+.btn.btn-outline-primary:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(54, 84, 134, 0.25);
+}
+
+.btn.btn-outline-primary i {
+    font-size: 0.875rem;
+}
+
+.progress {
+    height: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    margin-top: 1rem;
+}
+
+.progress-bar.progress-bar-striped.progress-bar-animated {
+    background-color: #178813;
+    background-image: linear-gradient(45deg, 
+        rgba(255,255,255,.15) 25%, 
+        transparent 25%, 
+        transparent 50%, 
+        rgba(255,255,255,.15) 50%, 
+        rgba(255,255,255,.15) 75%, 
+        transparent 75%, 
+        transparent);
+    background-size: 1rem 1rem;
+    transition: width 0.5s ease;
+    animation: progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes progress-bar-stripes {
+    from { background-position: 1rem 0; }
+    to { background-position: 0 0; }
+}
+
+/* Expanded state */
+.model-header.expanded {
+    background-color: #e9ecef;
+}
+
+.model-header.expanded .toggle-icon {
+    transform: rotate(90deg);
+}
+
+/* Add transitions back after initial load */
+.model-steps.initialized {
+    transition: all 0.3s ease;
+}

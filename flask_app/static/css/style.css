@@ -1,0 +1,212 @@
+
+body {
+  font-family: Arial, sans-serif;
+}
+.card-icon {
+  width: 48px;
+  height: 48px;
+  background-color: #e0f0ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transform: translateY(-2px);
+  transition: all 0.3s ease-in-out;
+}
+.workflow-container {
+  display: flex;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  gap: 20px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;  
+}
+.workflow-container::-webkit-scrollbar {
+  display: none; 
+}
+.workflow-card {
+  flex: 0 0 auto;
+  width: 280px;
+  margin-bottom: 15px;
+}
+.file-upload-container {
+  max-width: 600px;
+  margin: 120px auto;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+.file-upload-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+.file-upload-container p {
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+/* Chat section styles */
+.chat-section {
+  transition: display 0.3s ease-in-out;
+}
+.message {
+  border-radius: 8px;
+  margin: 8px 0;
+  padding: 10px 15px;
+}
+.chat-messages {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+}
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .workflow-card {
+    width: 200px;
+  }
+  .card-title {
+    font-size: 1.1rem;
+  }
+  .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+.clean-link {
+  text-decoration: none; 
+  color: inherit;      
+}
+
+.nav-pills {
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-pills .nav-link {
+  color: #0d6efd;
+  font-weight: 500;
+  margin: 0.2rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.3rem;
+  transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0a58ca;
+  text-decoration: none;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #0d6efd;
+  color: white;
+  box-shadow: 0 2px 10px rgba(13, 110, 253, 0.5);
+}
+
+/* Ajout d'une bordure en bas pour indiquer la section active */
+.nav-pills .nav-link.active::after {
+  content: "";
+  display: block;
+  height: 3px;
+  background-color: white;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 5px 5px;
+}
+
+/* Style du contenu des onglets */
+.tab-content {
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  border-top: none;
+  border-radius: 0 0 5px 5px;
+  background-color: #ffffff;
+}
+
+/* Boutons flottants pour les actions */
+.action-buttons {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Valeurs nulles avec un style d'avertissement */
+.null-value {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+/* Carte de modification avec ombre douce */
+.modification-card {
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.btn-primary , .btn-secondary,.btn-success {
+    background-color: rgb(46, 110, 208) !important;
+    border: none;
+} 
+.btn-secondary:hover,.btn-success:hover {
+    background-color: #3498db !important;
+} 
+
+.card_i {
+  height: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: box-shadow 0.3s;
+}
+
+.card_i-body i {
+  font-size: 30px;
+  color: #3498db;
+  margin-bottom: 10px;
+}
+
+.card_i-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.card_i-text {
+  font-size: 14px;
+  color: #555;
+}
+
+.card_i-body ul {
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.card_i-body ul li {
+  margin-bottom: 5px;
+}
+
+.card_i:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Make sure all cards have equal heights */
+.card_i-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+
